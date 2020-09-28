@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebSockets</title>
+</head>
+
+<body onload="onload()">
+
+    <h1>Hello WebSockets</h1>
+
+</body>
+
+<style>
+    body {
+        background-color: lightblue;
+        overflow: auto;
+    }
+</style>
+
+<script>
+    function onload() {
+
+        let ws = new WebSocket('ws://localhost:8080')
+        ws.onopen = () => {
+            console.log('open connection')
+        }
+        ws.onclose = () => {
+            console.log('close connection')
+        }
+        ws.onmessage = event => {
+            console.log('client收到server信息')
+            console.log(event.data)
+            var msg = document.createElement('div')
+            msg.innerHTML = event.data;
+            document.querySelector('body').append(msg);
+            msg.focus();
+
+        }
+
+    }
+</script>
+
+</html>
